@@ -1,4 +1,4 @@
-## 1.1 kvm常用操作
+## kvm常用操作
 
 ### 创建虚拟机
 
@@ -20,7 +20,7 @@ virsh define  vm-denis-cmdb1.xml
 virsh start vm-denis-cmdb1
 
 virsh list
-virsh dumpxml <id>  //查看端口
+virsh dumpxml <id>  #查看用于vnc view连接的端口
 ```
 
 用vnc viewer连接192.168.252.82:<端口>后查看ip, 即可用xshell连接
@@ -171,5 +171,7 @@ tmpfs           380M     0  380M   0% /run/user/0
 ### 参考文章
 
 https://blog.51cto.com/wutou/1782931
+
 https://blog.51cto.com/speakingbaicai/1161964
+
 https://www.cnblogs.com/chenjiahe/p/5919426.html
