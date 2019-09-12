@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 ================================================
-方方面面
+老方的博客
 ================================================
 
 Contents:
@@ -13,6 +13,5 @@ Contents:
    :maxdepth: 2
    :glob:
    
-  
    chapters/*
    thanks

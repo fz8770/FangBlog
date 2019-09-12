@@ -18,8 +18,8 @@ import sys
 # -- Project information -----------------------------------------------------
 
 project = '老方的博客'
-copyright = '2019, denis.fang'
-author = 'denis.fang'
+copyright = '2019, Denis.Fang'
+author = 'Denis.Fang'
 
 # The full version, including alpha/beta/rc tags
 release = '1.0'
