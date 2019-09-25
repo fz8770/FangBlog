@@ -1,6 +1,6 @@
-## kvm常用操作
+# kvm常用操作
 
-### 创建虚拟机
+## 创建虚拟机
 
 ```shell
 
@@ -26,7 +26,7 @@ virsh dumpxml <id>  #查看用于vnc view连接的端口
 用vnc viewer连接192.168.252.82:<端口>后查看ip, 即可用xshell连接
 
 
-### 登录虚拟机后操作
+## 登录虚拟机后操作
 
 更改默认密码
 
@@ -36,7 +36,7 @@ virsh dumpxml <id>  #查看用于vnc view连接的端口
 
 关闭sshd里dns
 
-### 其它操作
+## 其它操作
 
 ```shell
 virsh destroy <id> #删除虚拟机
@@ -48,7 +48,7 @@ virsh blockresize分情况
 
 ```
 
-### 调整虚拟机硬盘大小
+## 调整虚拟机硬盘大小
 
 
 
@@ -168,7 +168,7 @@ tmpfs           380M     0  380M   0% /run/user/0
 
 ```
 
-### 参考文章
+## 参考文章
 
 https://blog.51cto.com/wutou/1782931
 

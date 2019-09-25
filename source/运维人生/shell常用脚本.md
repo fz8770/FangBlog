@@ -1,6 +1,6 @@
-## shell常用脚本
+# shell常用脚本
 
-### centos7新装设置IP
+## centos7新装设置IP
 
 ifcfg-eno1根据自己的名称变化，$1第一个参数为ip地址最后一位
 
@@ -10,8 +10,9 @@ ifcfg-eno1根据自己的名称变化，$1第一个参数为ip地址最后一位
 
 #! /bin/bash
 
-sed -i 's/DHCP/none/g' /etc/sysconfig/network-scripts/ifcfg-eno1
-sed -i 's/ONBOOT=no/ONBOOT=yes/g' /etc/sysconfig/network-scripts/ifcfg-eno1
+# I 不区分大小写
+sed -i 's/DHCP/none/Ig' /etc/sysconfig/network-scripts/ifcfg-eno1
+sed -i 's/ONBOOT=no/ONBOOT=yes/Ig' /etc/sysconfig/network-scripts/ifcfg-eno1
 
 cat>> /etc/sysconfig/network-scripts/ifcfg-eno1 <<EOF
 IPADDR="10.255.201.$1"
