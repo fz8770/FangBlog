@@ -1,6 +1,6 @@
 build/
 .idea/
-source\运维人生\imgs
+source/运维人生/imgs
 *.pyc
 Makefile
 Pipfile
