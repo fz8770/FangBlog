@@ -1,5 +1,6 @@
 build/
 .idea/
+source\ткн╛хкиЗ\imgs
 *.pyc
 Makefile
 Pipfile
