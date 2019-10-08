@@ -64,7 +64,7 @@ spec:
 
 ```
 
-开始创建
+开始创建服务
 
 ```shell
 kubectl apply -f myql-rc.yaml 
@@ -120,7 +120,7 @@ spec:
 ~                
 ```
 
-开始创建
+开始创建服务
 
 ```shell
 kubectl apply -f myweb-rc.yaml 

@@ -8,46 +8,48 @@ node2  192.168.252.89
 
 ## 准备工作(三台机器执行)
 
-### 关闭selinux
+```shell
+
+# 关闭selinux
 
 setenforce 0
 sed --follow-symlinks -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
 
-### 关闭防火墙
+# 关闭防火墙
 
 systemctl stop iptables && systemctl disable iptables
 systemctl stop firewalld  && systemctl disable firewalld
 
 
-### 修改hostname
+# 修改hostname
 
 hostnamectl set-hostname 主机名
 
-### 所有机器添加hosts
+# 所有机器添加hosts
 
 echo "192.168.252.79 master1" >> /etc/hosts
 echo "192.168.252.88 node1" >> /etc/hosts
 echo "192.168.252.89 node2" >> /etc/hosts
 
-### 安装gcc开发工具等
+# 安装gcc开发工具等
 yum install -y  gcc*   
 
 yum install -y vim-enhanced wget  bash-completion  lrzsz ntpdate sysstat iftop htop dstat lsof chkconfig unzip telnet nmap net-tools git bzip2  bind-utils
 
 yum install -y expat-devel  pcre-devel libxml2-devel  openssl openssl-devel  bzip2-devel  libjpeg-devel  libpng-devel   freetype-devel    libXpm-devel  libmcrypt-devel   libaio  libaio-devel  php-mysqlnd   mysql-devel gd-devel  gdbm-devel  glib2-devel  libdb4-devel    libdb4-devel  libicu-devel   libxslt-devel   readline-devel    xmlrpc-c   xmlrpc-c-devel curl-devel yum-utils device-mapper-persistent-data lvm2  conntrack-tools
 
-### 时间同步
+# 时间同步
 
 ntpdate 1.cn.pool.ntp.org
 
 echo "*/15 * * * * /usr/sbin/ntpdate 1.cn.pool.ntp.org  >/dev/null 2>&1"  >>/var/spool/cron/root
 
-### 升级/重启
+# 升级/重启
 
 yum update -y 
 reboot
 
-### 配置免密登录
+# 配置免密登录
 
 把公钥传去其他每台机器，当然如果借助ansible或者脚本之类更方便
 
@@ -55,6 +57,19 @@ ssh-keygen -t rsa
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.252.62
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.252.63
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.252.64
+
+# 机器参数修改
+
+cat <<EOF | tee /etc/sysctl.d/k8s.conf
+net.ipv4.ip_forward = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+
+sysctl -p /etc/sysctl.d/k8s.conf
+
+
+```
 
 ### 升级最新稳定版内核(选做)
 
@@ -69,15 +84,6 @@ grub2-set-default 0
 reboot
 
 
-### 机器参数修改
-
-cat <<EOF | tee /etc/sysctl.d/k8s.conf
-net.ipv4.ip_forward = 1
-net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1
-EOF
-
-sysctl -p /etc/sysctl.d/k8s.conf
 
 
 ### 安装docker
