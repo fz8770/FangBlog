@@ -1,4 +1,4 @@
-# shell常用脚本
+# shell 常用脚本
 
 ## centos7新装设置IP
 

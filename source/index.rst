@@ -24,6 +24,13 @@
 
 .. toctree::
    :maxdepth: 2
+   :caption: K8S学习
+   :glob:
+   
+   /K8S学习/*   
+
+.. toctree::
+   :maxdepth: 2
    :caption: 特别说明
    :glob:
 

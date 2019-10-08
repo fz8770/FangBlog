@@ -16,7 +16,7 @@ rbd list ssd
 rbd snap list ssd/CentOS7Templet
 rbd clone ssd/CentOS7Templet@base ssd/vm-denis-cmdb1  #复制快照
 rbd resize  ssd/vm-denis-cmdb1 --size 30G   或者  virsh blockresize --domian vm-denis-cmbd1 --path vda --size 30G #调整硬盘大小 
-virsh define  vm-denis-cmdb1.xml 
+virsh define  vm-denis-cmdb1.xml #从XML文件定义（但不启动）一个虚拟机
 virsh start vm-denis-cmdb1
 
 virsh list
@@ -36,15 +36,38 @@ virsh dumpxml <id>  #查看用于vnc view连接的端口
 
 关闭sshd里dns
 
+## 快照操作
+
+```shell
+virsh -list -all
+
+ -     vm-denis-k8s1                  shut off
+
+rbd snap create ssd/vm-denis-k8s1@snapshot1   #创建快照(首先关闭虚拟机)
+rbd snap ls ssd/vm-denis-k8s1  
+virsh start vm-denis-k8s1  #启动虚拟机
+
+
+rbd snap rollback ssd/vm-denis-k8s1@snapshot1  #恢复快照(关闭虚拟机后操作)
+rbd snap rm ssd/vm-denis-k8s1@snapshot1  #删除快照
+rbd snap purge ssd/vm-denis-k8s1 #删除多个快照
+```
+
 ## 其它操作
 
 ```shell
-virsh destroy <id> #删除虚拟机
+virsh destroy <id> #停止虚拟机
+virsh undefine vm-denis-cmdb1 #取消虚拟机
+
 virsh create vm-denis-cmdb1.xml #一次性启动
 
 virsh blockresize分情况
 - 如果虚拟机是开机状态下，不用调rbd resize，直接调virsh blockresize就行，它会帮忙自动执行rbd resize或qemu-img resize
 - 如果虚拟机是关机状态，则不用调该命令，直接调底层的resize，比如rbd就调rbd resize，qcow2就调qemu-img resize
+
+rbd rm  ssd/vm-denis-cmdb1  #删除镜像
+
+
 
 ```
 
